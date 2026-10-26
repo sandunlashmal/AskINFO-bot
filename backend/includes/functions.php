@@ -46,3 +46,18 @@ function lang_col(string $column, string $lang, string $table = ''): string
     return "COALESCE(NULLIF($translated, ''), $english) AS `$column`";
 }
 
+// Send an error message as JSON and stop
+function send_error(string $message, int $status = 400): void
+{
+    send_json(['error' => $message], $status);
+}
+
+// Read a required whole-number id from the URL, e.g. ?id=4
+function get_id(string $name): int
+{
+    $value = filter_input(INPUT_GET, $name, FILTER_VALIDATE_INT);
+    if (!$value || $value < 1) {
+        send_error("Please send a valid '$name'.");
+    }
+    return $value;
+}
