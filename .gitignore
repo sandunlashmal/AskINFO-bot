@@ -1,0 +1,7 @@
+# Real settings with passwords (never upload)
+backend/config.php
+
+# Test file and uploaded PDFs
+backend/hello.php
+backend/uploads/
+*.sql
