@@ -26,5 +26,23 @@ function send_json($data, int $status = 200): void
     echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     exit;
 }
+// Read ?lang= from the URL. Anything unknown becomes 'en'
+function get_lang(): string
+{
+    $lang = $_GET['lang'] ?? 'en';
+    return in_array($lang, LANGUAGES, true) ? $lang : 'en';
+}
 
+// One text column in the chosen language.
+// If the Sinhala/Tamil text is empty, the English text is used.
+function lang_col(string $column, string $lang, string $table = ''): string
+{
+    $prefix  = $table ? $table . '.' : '';
+    $english = $prefix . '`' . $column . '`';
+    if ($lang === 'en') {
+        return "$english AS `$column`";
+    }
+    $translated = $prefix . '`' . $column . '_' . $lang . '`';
+    return "COALESCE(NULLIF($translated, ''), $english) AS `$column`";
+}
 
