@@ -4,6 +4,17 @@ require_once __DIR__ . '/../config.php';
 // Every API answer is JSON
 header('Content-Type: application/json; charset=utf-8');
 
+header('Access-Control-Allow-Origin: ' . FRONTEND_URL);
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Credentials: true');
+
+// The browser sends an OPTIONS request first for some calls. Answer and stop.
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
+
 // Connect to MySQL once and reuse the connection
 function db(): PDO
 {
@@ -61,3 +72,10 @@ function get_id(string $name): int
     }
     return $value;
 }
+
+
+// Any database error: log it, and give the user a simple message
+set_exception_handler(function (Throwable $e) {
+    error_log('[askinfo-bot] ' . $e->getMessage());
+    send_error('Something went wrong on the server. Please try again.', 500);
+});
