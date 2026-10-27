@@ -81,6 +81,8 @@ set_exception_handler(function (Throwable $e) {
 });
 
 
+//Admin login / logout
+
 // check the request method
 function require_method(string $method): void
 {
@@ -113,4 +115,44 @@ function require_admin(): int
         send_error('Please log in first.', 401);
     }
     return $_SESSION['admin_id'];
+}
+
+// admin add / edit / delete
+
+// take only the needed fields, empty text becomes NULL
+function pick(array $body, array $fields): array
+{
+    $data = [];
+    foreach ($fields as $field) {
+        $value = trim((string) ($body[$field] ?? ''));
+        $data[$field] = $value === '' ? null : $value;
+    }
+    return $data;
+}
+
+// check if a row with this id is in the table
+function row_exists(string $table, $id): bool
+{
+    $stmt = db()->prepare("SELECT 1 FROM `$table` WHERE id = ?");
+    $stmt->execute([$id]);
+    return (bool) $stmt->fetch();
+}
+
+// add a new row and return its id
+function insert_row(string $table, array $data): int
+{
+    $columns = '`' . implode('`, `', array_keys($data)) . '`';
+    $marks   = implode(', ', array_fill(0, count($data), '?'));
+    db()->prepare("INSERT INTO `$table` ($columns) VALUES ($marks)")
+        ->execute(array_values($data));
+    return (int) db()->lastInsertId();
+}
+
+// update one row
+function update_row(string $table, int $id, array $data): void
+{
+    $sets   = implode(', ', array_map(fn($column) => "`$column` = ?", array_keys($data)));
+    $values = array_values($data);
+    $values[] = $id;
+    db()->prepare("UPDATE `$table` SET $sets WHERE id = ?")->execute($values);
 }
