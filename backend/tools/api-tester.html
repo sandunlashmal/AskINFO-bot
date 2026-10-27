@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>API Tester</title>
+<style>
+  body { font-family: sans-serif; max-width: 800px; margin: 20px auto; padding: 0 16px; }
+  label { display: block; margin-top: 12px; font-weight: bold; }
+  input, select, textarea { width: 100%; padding: 8px; font-size: 14px; box-sizing: border-box; }
+  textarea { height: 140px; font-family: monospace; }
+  button { margin-top: 14px; padding: 10px 24px; font-size: 15px; background: #1F3A68; color: #fff; border: 0; border-radius: 6px; cursor: pointer; }
+  pre { background: #f4f5f7; padding: 12px; white-space: pre-wrap; word-break: break-word; }
+</style>
+</head>
+<body>
+<h2>Ask INFO bot - API Tester</h2>
+
+<label>Method</label>
+<select id="method">
+  <option>GET</option>
+  <option>POST</option>
+  <option>PUT</option>
+  <option>DELETE</option>
+</select>
+
+<label>URL (after backend/)</label>
+<input id="url" value="api/divisions.php">
+
+<label>Body (JSON, for POST and PUT)</label>
+<textarea id="body"></textarea>
+
+<label>PDF file (only for uploading a form)</label>
+<input id="file" type="file" accept="application/pdf">
+
+<button onclick="send()">Send</button>
+
+<h3 id="status"></h3>
+<pre id="result"></pre>
+
+<script>
+async function send() {
+  const method = document.getElementById('method').value;
+  const url    = '../' + document.getElementById('url').value;
+  const text   = document.getElementById('body').value.trim();
+  const file   = document.getElementById('file').files[0];
+  const show   = (status, result) => {
+    document.getElementById('status').textContent = status;
+    document.getElementById('result').textContent = result;
+  };
+
+  let fields = {};
+  try {
+    fields = text ? JSON.parse(text) : {};
+  } catch (e) {
+    show('Body is not valid JSON', e.message);
+    return;
+  }
+
+  // credentials: 'include' sends the login cookie with every request
+  const options = { method, credentials: 'include' };
+  if (file) {
+    // A file is sent as a form: the JSON fields plus the file
+    const form = new FormData();
+    for (const key in fields) form.append(key, fields[key]);
+    form.append('file', file);
+    options.body = form;
+  } else if (text && method !== 'GET') {
+    options.headers = { 'Content-Type': 'application/json' };
+    options.body = text;
+  }
+
+  const res = await fetch(url, options);
+  const raw = await res.text();
+  let pretty = raw;
+  try { pretty = JSON.stringify(JSON.parse(raw), null, 2); } catch (e) {}
+  show(res.status + ' ' + res.statusText, pretty);
+}
+</script>
+</body>
+</html>
