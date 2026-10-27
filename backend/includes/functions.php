@@ -79,3 +79,38 @@ set_exception_handler(function (Throwable $e) {
     error_log('[askinfo-bot] ' . $e->getMessage());
     send_error('Something went wrong on the server. Please try again.', 500);
 });
+
+
+// check the request method
+function require_method(string $method): void
+{
+    if ($_SERVER['REQUEST_METHOD'] !== $method) {
+        send_error("Please use $method for this request.", 405);
+    }
+}
+
+// get the JSON data sent in the request
+function get_body(): array
+{
+    $data = json_decode(file_get_contents('php://input'), true);
+    return is_array($data) ? $data : [];
+}
+
+// start the session to remember the logged in admin
+function start_session(): void
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax']);
+        session_start();
+    }
+}
+
+// only allow logged in admins
+function require_admin(): int
+{
+    start_session();
+    if (empty($_SESSION['admin_id'])) {
+        send_error('Please log in first.', 401);
+    }
+    return $_SESSION['admin_id'];
+}
