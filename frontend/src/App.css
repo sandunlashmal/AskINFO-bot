@@ -127,6 +127,110 @@
   font-size: 14px;
   cursor: pointer;
 }
+/* ---------- service details page ---------- */
+.label {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: #5a6478;
+}
+
+.description {
+  margin: 6px 0 16px;
+  line-height: 1.6;
+}
+
+/* a white box for each part of the service */
+.box {
+  margin: 0 0 14px;
+  padding: 14px 16px;
+  border: 1px solid #dde3ee;
+  border-radius: 10px;
+}
+
+.box h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  color: #1f3a68;
+}
+
+.steps,
+.documents {
+  margin: 0;
+  padding-left: 22px;
+  line-height: 1.6;
+}
+
+.steps li,
+.documents li {
+  margin-bottom: 6px;
+}
+
+/* fee and time boxes */
+.facts {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+
+.fact {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #eef1f6;
+}
+
+.fact span {
+  display: block;
+  font-size: 13px;
+  color: #5a6478;
+}
+
+.fact b {
+  font-size: 17px;
+  color: #1f3a68;
+}
+
+/* PDF download buttons */
+.downloads {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.download {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #1f3a68;
+  color: #fff;
+  text-decoration: none;
+}
+
+.download:hover {
+  background: #2c4f8c;
+}
+
+.officer-name {
+  margin: 0;
+  font-weight: bold;
+}
+
+.officer-role {
+  margin: 2px 0 8px;
+  color: #5a6478;
+}
+
+.contact {
+  display: block;
+  margin-top: 6px;
+  color: #1f3a68;
+  text-decoration: none;
+}
+
+.bottom-back {
+  margin-top: 8px;
+  text-align: center;
+}
 
 /* computer screens: a card in the middle and 2 buttons in a row */
 @media (min-width: 700px) {
