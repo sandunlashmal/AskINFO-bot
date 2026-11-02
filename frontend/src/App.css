@@ -1,6 +1,6 @@
-/* the chat box in the middle of the page */
-.chat {
-  max-width: 480px;
+/* the page box in the middle of the screen */
+.page {
+  max-width: 760px;
   min-height: 100vh;
   margin: 0 auto;
   background: #fff;
@@ -8,82 +8,161 @@
   flex-direction: column;
 }
 
-.chat-header {
+.page-header {
   background: #1f3a68;
   color: #fff;
   padding: 14px 18px;
 }
 
-.chat-header h1 {
+.page-header h1 {
   margin: 0;
   font-size: 20px;
 }
 
-.chat-header p {
+.page-header p {
   margin: 2px 0 0;
   font-size: 13px;
   opacity: 0.85;
 }
 
-.chat-body {
+.page-body {
   flex: 1;
-  padding: 16px;
+  padding: 18px;
+}
+
+/* back link at the top of a page */
+.back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #1f3a68;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.title {
+  margin: 0 0 4px;
+  font-size: 22px;
+  color: #1f3a68;
+}
+
+.question {
+  margin: 0 0 14px;
+  font-size: 17px;
+  font-weight: normal;
+  line-height: 1.6;
+}
+
+/* big menu buttons, one under the other */
+.menu {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* message bubbles */
-.bubble {
-  max-width: 85%;
-  padding: 10px 14px;
-  border-radius: 14px;
-  line-height: 1.5;
-}
-
-.bubble.bot {
-  background: #eef1f6;
-  align-self: flex-start;
-  border-bottom-left-radius: 4px;
-}
-
-.bubble.user {
-  background: #1f3a68;
-  color: #fff;
-  align-self: flex-end;
-  border-bottom-right-radius: 4px;
-}
-
-/* option buttons under a bot message */
-.options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.options button {
-  padding: 8px 14px;
-  border: 1px solid #1f3a68;
-  border-radius: 20px;
-  background: #fff;
+.menu-item {
+  display: block;
+  padding: 14px 16px;
+  border: 1px solid #c9d2e3;
+  border-radius: 10px;
   color: #1f3a68;
-  font-size: 15px;
+  background: #fff;
+  text-decoration: none;
   font-family: inherit;
+  font-size: 16px;
+  text-align: left;
   cursor: pointer;
 }
 
-.options button:hover,
-.options button.selected {
+.menu-item:hover {
   background: #1f3a68;
   color: #fff;
 }
 
 .note {
-  margin: 0;
+  margin: 0 0 12px;
   font-size: 14px;
   color: #5a6478;
 }
 
 .note.error {
   color: #c0392b;
+}
+
+/* popup with the services of a division */
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 25, 45, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 10;
+}
+
+.popup {
+  width: 100%;
+  max-width: 760px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  padding: 20px 18px 28px;
+}
+
+.popup-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.popup-close {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 20px;
+  background: #eef1f6;
+  color: #1f3a68;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* computer screens: a card in the middle and 2 buttons in a row */
+@media (min-width: 700px) {
+  .page {
+    min-height: auto;
+    margin: 40px auto;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(31, 58, 104, 0.12);
+  }
+
+  .page-header {
+    padding: 20px 28px;
+  }
+
+  .page-body {
+    padding: 24px 28px 32px;
+  }
+
+  .menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* the popup is a box in the middle, services one under the other */
+  .popup-backdrop {
+    align-items: center;
+  }
+
+  .popup {
+    max-width: 520px;
+    border-radius: 14px;
+    padding: 24px 28px 28px;
+  }
+
+  .popup .menu {
+    grid-template-columns: 1fr;
+  }
 }
