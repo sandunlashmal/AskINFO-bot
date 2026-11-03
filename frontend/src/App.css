@@ -363,6 +363,10 @@
   font-family: inherit;
 }
 
+.field select {
+  background: #fff;
+}
+
 .note.success {
   color: #1e7b3a;
 }

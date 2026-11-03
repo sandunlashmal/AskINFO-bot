@@ -6,7 +6,7 @@ import { useApi } from '../api';
 const ADMIN_MENU = [
   { icon: '📋', en: 'Services', si: 'සේවා' },
   { icon: '🏢', en: 'Divisions', si: 'අංශ', to: '/admin/divisions' },
-  { icon: '👤', en: 'Officers', si: 'නිලධාරීන්' },
+  { icon: '👤', en: 'Officers', si: 'නිලධාරීන්', to: '/admin/officers' },
   { icon: '📄', en: 'PDF forms', si: 'අයදුම්පත්' },
   { icon: '🔑', en: 'Change password', si: 'මුරපදය වෙනස් කිරීම', to: '/admin/password' },
 ];
@@ -43,7 +43,6 @@ function AdminHomePage() {
               ),
             )}
           </div>
-          <p className="note">Grey items come soon. (අළු පැහැති අයිතම ඉක්මනින් එකතු කෙරේ.)</p>
 
           {/* see the chatbot as the public sees it (you stay logged in) */}
           <NavLink to="/" className="back">
