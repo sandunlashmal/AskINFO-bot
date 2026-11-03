@@ -51,3 +51,19 @@ export function useApi(path) {
     loading: !ready,
   };
 }
+
+// send a file (e.g. a PDF) with some text, as form data, not JSON
+export async function uploadFile(path, formData) {
+  const res = await fetch(`${API_URL}/${path}`, {
+    method: 'POST',
+    credentials: 'include',
+    body: formData, // the browser adds the right Content-Type itself
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const error = new Error(data.error || `Request failed: ${res.status}`);
+    error.status = res.status;
+    throw error;
+  }
+  return data;
+}

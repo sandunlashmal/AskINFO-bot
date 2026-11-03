@@ -482,6 +482,19 @@
   margin-bottom: 14px;
 }
 
+/* ---------- Step 6.5: PDF forms ---------- */
+/* the "Open" link looks like the other buttons */
+a.secondary {
+  text-align: center;
+  text-decoration: none;
+}
+
+/* the file box */
+.field input[type='file'] {
+  background: #fff;
+  font-size: 14px;
+}
+
 /* computer screens: a card in the middle and 2 buttons in a row */
 @media (min-width: 700px) {
   .page {

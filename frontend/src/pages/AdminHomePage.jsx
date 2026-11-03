@@ -7,7 +7,7 @@ const ADMIN_MENU = [
   { icon: '📋', en: 'Services', si: 'සේවා', to: '/admin/services' },
   { icon: '🏢', en: 'Divisions', si: 'අංශ', to: '/admin/divisions' },
   { icon: '👤', en: 'Officers', si: 'නිලධාරීන්', to: '/admin/officers' },
-  { icon: '📄', en: 'PDF forms', si: 'අයදුම්පත්' },
+  { icon: '📄', en: 'PDF forms', si: 'අයදුම්පත්', to: '/admin/forms' },
   { icon: '🔑', en: 'Change password', si: 'මුරපදය වෙනස් කිරීම', to: '/admin/password' },
 ];
 
