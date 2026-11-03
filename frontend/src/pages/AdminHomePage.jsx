@@ -2,13 +2,13 @@ import { Navigate, NavLink } from 'react-router';
 import AdminLayout from '../components/AdminLayout';
 import { useApi } from '../api';
 
-// the admin pages we make in Step 6
+// the admin pages (an item without "to" is not ready yet)
 const ADMIN_MENU = [
   { icon: '📋', en: 'Services', si: 'සේවා' },
   { icon: '🏢', en: 'Divisions', si: 'අංශ' },
   { icon: '👤', en: 'Officers', si: 'නිලධාරීන්' },
   { icon: '📄', en: 'PDF forms', si: 'අයදුම්පත්' },
-  { icon: '🔑', en: 'Change password', si: 'මුරපදය වෙනස් කිරීම' },
+  { icon: '🔑', en: 'Change password', si: 'මුරපදය වෙනස් කිරීම', to: '/admin/password' },
 ];
 
 // admin page 2: the menu after login
@@ -31,13 +31,19 @@ function AdminHomePage() {
           <p className="question">What do you want to do? (ඔබට කුමක් කිරීමට අවශ්‍යද?)</p>
 
           <div className="menu">
-            {ADMIN_MENU.map((item) => (
-              <div key={item.en} className="menu-item soon">
-                {item.icon} {item.en} <small>({item.si})</small>
-              </div>
-            ))}
+            {ADMIN_MENU.map((item) =>
+              item.to ? (
+                <NavLink key={item.en} to={item.to} className="menu-item">
+                  {item.icon} {item.en} <small>({item.si})</small>
+                </NavLink>
+              ) : (
+                <div key={item.en} className="menu-item soon">
+                  {item.icon} {item.en} <small>({item.si})</small>
+                </div>
+              ),
+            )}
           </div>
-          <p className="note">These pages come in Step 6. (මෙම පිටු ඊළඟ පියවරේදී එකතු කෙරේ.)</p>
+          <p className="note">Grey items come soon. (අළු පැහැති අයිතම ඉක්මනින් එකතු කෙරේ.)</p>
 
           {/* see the chatbot as the public sees it (you stay logged in) */}
           <NavLink to="/" className="back">

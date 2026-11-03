@@ -336,6 +336,46 @@
   color: #1f3a68;
 }
 
+/* ---------- Step 6: admin forms ---------- */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 520px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.field input,
+.field textarea,
+.field select {
+  padding: 11px 13px;
+  border: 1px solid #c9d2e3;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.note.success {
+  color: #1e7b3a;
+}
+
+/* "Show password" tick box */
+.show-password,
+.login-form .show-password {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 /* computer screens: a card in the middle and 2 buttons in a row */
 @media (min-width: 700px) {
   .page {

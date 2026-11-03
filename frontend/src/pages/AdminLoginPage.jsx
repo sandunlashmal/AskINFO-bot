@@ -1,15 +1,18 @@
 import { useState } from 'react';
-import { Navigate, NavLink, useNavigate } from 'react-router';
+import { Navigate, NavLink, useLocation, useNavigate } from 'react-router';
 import AdminLayout from '../components/AdminLayout';
 import { sendJSON, useApi } from '../api';
 
 // admin page 1: login with email and password
 function AdminLoginPage() {
   const navigate = useNavigate();
+  // a message sent from another page, e.g. after changing the password
+  const doneMessage = useLocation().state?.message;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [busy, setBusy] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   // already logged in? then me.php gives the admin
   const { data: admin, loading } = useApi('admin/me.php');
@@ -36,6 +39,7 @@ function AdminLoginPage() {
       .catch((error) => {
         if (error.status === 401) {
           setMessage('Wrong email or password. (ඊමේල් ලිපිනය හෝ මුරපදය වැරදිය.)');
+          setPassword(''); // empty the password box to type it again
         } else if (error.status === 400) {
           setMessage('Please enter the email and the password. (කරුණාකර ඊමේල් ලිපිනය සහ මුරපදය ඇතුළත් කරන්න.)');
         } else {
@@ -65,6 +69,7 @@ function AdminLoginPage() {
 
       <form className="login-form" onSubmit={login}>
         <h2 className="title">Login (ඇතුළු වන්න)</h2>
+        {doneMessage && !message && <p className="note success">{doneMessage}</p>}
 
         <label>
           Email (ඊමේල් ලිපිනය)
@@ -80,12 +85,22 @@ function AdminLoginPage() {
         <label>
           Password (මුරපදය)
           <input
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             autoComplete="current-password"
             required
           />
+        </label>
+
+        {/* let the user see what is in the password box */}
+        <label className="show-password">
+          <input
+            type="checkbox"
+            checked={showPassword}
+            onChange={(event) => setShowPassword(event.target.checked)}
+          />
+          Show password (මුරපදය පෙන්වන්න)
         </label>
 
         {message && <p className="note error">{message}</p>}
