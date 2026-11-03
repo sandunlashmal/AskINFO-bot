@@ -5,7 +5,7 @@ import { useApi } from '../api';
 // the admin pages (an item without "to" is not ready yet)
 const ADMIN_MENU = [
   { icon: '📋', en: 'Services', si: 'සේවා' },
-  { icon: '🏢', en: 'Divisions', si: 'අංශ' },
+  { icon: '🏢', en: 'Divisions', si: 'අංශ', to: '/admin/divisions' },
   { icon: '👤', en: 'Officers', si: 'නිලධාරීන්' },
   { icon: '📄', en: 'PDF forms', si: 'අයදුම්පත්' },
   { icon: '🔑', en: 'Change password', si: 'මුරපදය වෙනස් කිරීම', to: '/admin/password' },

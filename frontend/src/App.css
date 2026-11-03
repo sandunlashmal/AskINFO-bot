@@ -127,6 +127,7 @@
   font-size: 14px;
   cursor: pointer;
 }
+
 /* ---------- service details page ---------- */
 .label {
   margin: 0 0 4px;
@@ -231,6 +232,7 @@
   margin-top: 8px;
   text-align: center;
 }
+
 /* ---------- footer and admin pages ---------- */
 .page-footer {
   padding: 14px 18px;
@@ -376,6 +378,73 @@
   cursor: pointer;
 }
 
+/* ---------- Step 6.2: admin lists (divisions, officers ...) ---------- */
+.add-button {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #dfe5f0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.admin-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.admin-row-text small {
+  color: #5b6b85;
+}
+
+.admin-row-buttons,
+.form-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-row-buttons button,
+.form-buttons button {
+  flex: 1;
+}
+
+.secondary,
+.danger {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.secondary {
+  border: 1px solid #1f3a68;
+  color: #1f3a68;
+}
+
+.danger {
+  border: 1px solid #b3261e;
+  color: #b3261e;
+}
+
+.form-buttons .secondary {
+  font-size: 16px;
+}
+
 /* computer screens: a card in the middle and 2 buttons in a row */
 @media (min-width: 700px) {
   .page {
@@ -412,5 +481,20 @@
 
   .popup .menu {
     grid-template-columns: 1fr;
+  }
+
+  /* admin list: text on the left, buttons on the right */
+  .admin-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .admin-row-buttons button {
+    flex: none;
+  }
+
+  .add-button {
+    width: auto;
   }
 }
