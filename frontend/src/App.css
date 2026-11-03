@@ -445,6 +445,24 @@
   font-size: 16px;
 }
 
+/* Google Translate link under the Sinhala and Tamil boxes */
+.translate-note {
+  color: #5b6b85;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.translate-link {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 3px 10px;
+  border: 1px solid #1f3a68;
+  border-radius: 999px;
+  color: #1f3a68;
+  font-weight: 600;
+  text-decoration: none;
+}
+
 /* computer screens: a card in the middle and 2 buttons in a row */
 @media (min-width: 700px) {
   .page {

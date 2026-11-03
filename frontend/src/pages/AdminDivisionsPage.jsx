@@ -88,12 +88,12 @@ function AdminDivisionsPage() {
       <AdminPage title={editing.id ? 'Edit division (අංශය සංස්කරණය)' : 'Add division (අංශයක් එක් කිරීම)'}>
         <form className="admin-form" onSubmit={save}>
           <Field label="Name in English (නම ඉංග්‍රීසියෙන්) *" value={editing.name} onChange={(value) => change('name', value)} required />
-          <Field label="Name in Sinhala (නම සිංහලෙන්)" value={editing.name_si} onChange={(value) => change('name_si', value)} />
-          <Field label="Name in Tamil (නම දෙමළෙන්)" value={editing.name_ta} onChange={(value) => change('name_ta', value)} />
+          <Field label="Name in Sinhala (නම සිංහලෙන්)" value={editing.name_si} onChange={(value) => change('name_si', value)} translate={{ from: editing.name, to: 'si' }} />
+          <Field label="Name in Tamil (නම දෙමළෙන්)" value={editing.name_ta} onChange={(value) => change('name_ta', value)} translate={{ from: editing.name, to: 'ta' }} />
 
           <Field label="Description in English (විස්තරය ඉංග්‍රීසියෙන්)" type="textarea" rows={3} value={editing.description} onChange={(value) => change('description', value)} />
-          <Field label="Description in Sinhala (විස්තරය සිංහලෙන්)" type="textarea" rows={3} value={editing.description_si} onChange={(value) => change('description_si', value)} />
-          <Field label="Description in Tamil (විස්තරය දෙමළෙන්)" type="textarea" rows={3} value={editing.description_ta} onChange={(value) => change('description_ta', value)} />
+          <Field label="Description in Sinhala (විස්තරය සිංහලෙන්)" type="textarea" rows={3} value={editing.description_si} onChange={(value) => change('description_si', value)} translate={{ from: editing.description, to: 'si' }} />
+          <Field label="Description in Tamil (විස්තරය දෙමළෙන්)" type="textarea" rows={3} value={editing.description_ta} onChange={(value) => change('description_ta', value)} translate={{ from: editing.description, to: 'ta' }} />
 
           <Field label="Place in the menu: 1, 2, 3 ... (මෙනුවේ ස්ථානය)" type="number" value={editing.sort_order} onChange={(value) => change('sort_order', value)} />
           <p className="note">Empty = at the end. (හිස්ව තැබුවහොත් අවසානයට එක් වේ.)</p>
