@@ -20,6 +20,11 @@ function Layout({ lang = 'en', backTo, backText, children }) {
         )}
         {children}
       </main>
+
+      {/* small link for the office staff who add the data */}
+      <footer className="page-footer">
+        <NavLink to="/admin">🔒 Staff login (කාර්ය මණ්ඩල පිවිසුම)</NavLink>
+      </footer>
     </div>
   );
 }
