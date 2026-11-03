@@ -467,6 +467,21 @@
   text-decoration: none;
 }
 
+/* ---------- Step 6.4: services form ---------- */
+/* a small heading for each part of a long form */
+.form-part {
+  margin: 12px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid #dfe5f0;
+  color: #1f3a68;
+  font-size: 17px;
+}
+
+/* the "Show division" list above the services */
+.list-filter {
+  margin-bottom: 14px;
+}
+
 /* computer screens: a card in the middle and 2 buttons in a row */
 @media (min-width: 700px) {
   .page {

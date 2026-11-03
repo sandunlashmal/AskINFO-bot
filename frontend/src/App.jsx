@@ -7,6 +7,7 @@ import AdminHomePage from './pages/AdminHomePage';
 import AdminPasswordPage from './pages/AdminPasswordPage';
 import AdminDivisionsPage from './pages/AdminDivisionsPage';
 import AdminOfficersPage from './pages/AdminOfficersPage';
+import AdminServicesPage from './pages/AdminServicesPage';
 import './App.css';
 
 // which page to show for each URL
@@ -22,6 +23,7 @@ function App() {
       <Route path="/admin/password" element={<AdminPasswordPage />} />
       <Route path="/admin/divisions" element={<AdminDivisionsPage />} />
       <Route path="/admin/officers" element={<AdminOfficersPage />} />
+      <Route path="/admin/services" element={<AdminServicesPage />} />
       {/* any other URL goes back to the first page */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
