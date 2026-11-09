@@ -8,8 +8,14 @@ function Layout({ lang = 'en', backTo, backText, children }) {
   return (
     <div className="page">
       <header className="page-header">
-        <h1>Ask INFO bot</h1>
-        <p>{t.office}</p>
+        {/* the emblem of Sri Lanka (file: frontend/public/emblem.svg) */}
+        <div className="brand">
+          <img src="/emblem.svg" alt="Emblem of Sri Lanka" className="emblem" />
+          <div>
+            <h1>Ask INFO bot</h1>
+            <p>{t.office}</p>
+          </div>
+        </div>
       </header>
 
       <main className="page-body">

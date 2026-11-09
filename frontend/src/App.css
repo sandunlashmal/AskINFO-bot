@@ -25,6 +25,23 @@
   opacity: 0.85;
 }
 
+/* the emblem next to the name */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.emblem {
+  width: 44px;
+  height: auto;
+  flex-shrink: 0;
+  /* a small white card, so the emblem is clear on the blue */
+  padding: 4px 6px;
+  border-radius: 10px;
+  background: #fff;
+}
+
 .page-body {
   flex: 1;
   padding: 18px;
@@ -533,6 +550,10 @@ a.secondary {
 
   .page-header {
     padding: 20px 28px;
+  }
+
+  .emblem {
+    width: 54px;
   }
 
   .page-body {

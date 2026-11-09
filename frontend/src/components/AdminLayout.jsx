@@ -15,9 +15,12 @@ function AdminLayout({ adminName, children }) {
   return (
     <div className="page">
       <header className="page-header admin-header">
-        <div>
-          <h1>Ask INFO bot · Admin</h1>
-          <p>Admin panel (පරිපාලක පුවරුව)</p>
+        <div className="brand">
+          <img src="/emblem.svg" alt="Emblem of Sri Lanka" className="emblem" />
+          <div>
+            <h1>Ask INFO bot · Admin</h1>
+            <p>Admin panel (පරිපාලක පුවරුව)</p>
+          </div>
         </div>
         {adminName && (
           <button className="logout" onClick={logout}>
