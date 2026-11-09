@@ -31,12 +31,31 @@
 }
 
 /* back link at the top of a page */
+/* "back" links look like a small button */
 .back {
-  display: inline-block;
-  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding: 8px 16px;
+  border: 1px solid #1f3a68;
+  border-radius: 999px;
+  background: #fff;
   color: #1f3a68;
-  text-decoration: none;
   font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.back:hover {
+  background: #1f3a68;
+  color: #fff;
+}
+
+/* a back button under the menu needs some space */
+.menu + .back {
+  margin-top: 18px;
 }
 
 .title {
@@ -493,6 +512,13 @@ a.secondary {
 .field input[type='file'] {
   background: #fff;
   font-size: 14px;
+}
+
+/* ---------- Step 6.6: forgot password ---------- */
+.forgot-link {
+  align-self: center;
+  color: #1f3a68;
+  font-size: 15px;
 }
 
 /* computer screens: a card in the middle and 2 buttons in a row */
