@@ -538,6 +538,130 @@ a.secondary {
   font-size: 15px;
 }
 
+/* "Welcome" in 3 languages on the first page: one row in a soft box */
+.welcome {
+  margin: 4px 0 22px;
+  padding: 14px 10px;
+  border: 1px solid #e1e8f4;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #eef3fb, #f8f4e8);
+  text-align: center;
+}
+
+.welcome-words {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 10px;
+}
+
+.welcome span {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.3px;
+  /* text with a navy to blue colour fade */
+  background: linear-gradient(90deg, #1f3a68, #3a6bc2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* each line comes in softly, one after the other */
+  animation: welcome-in 0.6s ease both;
+}
+
+.welcome span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.welcome span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes welcome-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* the "choose your language" lines in the middle, a little softer */
+.lang-question {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 15.5px;
+  color: #4a5872;
+}
+
+/* language buttons on the first page (a row on phones, cards on computers) */
+.lang-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lang-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1.5px solid #d5ddeb;
+  border-radius: 14px;
+  background: #fafcff;
+  color: #1f3a68;
+  text-decoration: none;
+}
+
+.lang-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #1f3a68;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.lang-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.lang-text strong {
+  font-size: 18px;
+}
+
+.lang-text small {
+  margin-top: 1px;
+  font-size: 13px;
+  color: #6a7a96;
+}
+
+.lang-arrow {
+  margin-left: auto;
+  font-size: 24px;
+  color: #9aa8c0;
+}
+
+.lang-button:hover {
+  border-color: #1f3a68;
+  background: #1f3a68;
+}
+
+.lang-button:hover .lang-letter {
+  background: #ffbe29;
+  color: #1f3a68;
+}
+
+.lang-button:hover .lang-text strong,
+.lang-button:hover .lang-text small,
+.lang-button:hover .lang-arrow {
+  color: #fff;
+}
+
 /* computer screens: a card in the middle and 2 buttons in a row */
 @media (min-width: 700px) {
   .page {
@@ -593,5 +717,40 @@ a.secondary {
 
   .add-button {
     width: auto;
+  }
+
+  /* language buttons: 3 cards in a row */
+  .lang-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .lang-button {
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 10px;
+    text-align: center;
+  }
+
+  .lang-letter {
+    width: 46px;
+    height: 46px;
+    font-size: 21px;
+  }
+
+  .lang-text strong {
+    font-size: 19px;
+  }
+
+  .lang-arrow {
+    display: none;
+  }
+
+  .welcome-words {
+    column-gap: 14px;
+  }
+
+  .welcome span {
+    font-size: 22px;
   }
 }
