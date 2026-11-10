@@ -23,13 +23,20 @@ function DivisionsPage() {
 
   return (
     <Layout lang={lang} backTo="/" backText={t.changeLanguage}>
-      <h2 className="question">{t.chooseDivision}</h2>
+      <h2 className="question division-question">{t.chooseDivision}</h2>
       <Status lang={lang} loading={loading} error={error} />
 
-      <div className="menu">
-        {divisions?.map((division) => (
-          <button key={division.id} className="menu-item" onClick={() => setOpenDivision(division)}>
-            {division.name}
+      <div className="division-list">
+        {divisions?.map((division, index) => (
+          <button key={division.id} className="division-button" onClick={() => setOpenDivision(division)}>
+            {/* the number of the division in a circle */}
+            <span className="division-number">{index + 1}</span>
+            <span className="division-text">
+              <strong>{division.name}</strong>
+              {/* the short description, only if the staff added one */}
+              {division.description && <small>{division.description}</small>}
+            </span>
+            <span className="division-arrow">›</span>
           </button>
         ))}
       </div>

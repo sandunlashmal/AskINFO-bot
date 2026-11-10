@@ -70,6 +70,17 @@
   color: #fff;
 }
 
+/* the arrow turns gold on hover, like the division numbers */
+.back-arrow {
+  flex-shrink: 0;
+  transition: transform 0.15s, color 0.15s;
+}
+
+.back:hover .back-arrow {
+  color: #ffbe29;
+  transform: translateX(-3px);
+}
+
 /* a back button under the menu needs some space */
 .menu + .back {
   margin-top: 18px;
@@ -680,6 +691,88 @@ a.secondary {
   color: #fff;
 }
 
+/* division page: a bold question and big division buttons */
+.division-question {
+  font-weight: 700;
+  color: #1f3a68;
+}
+
+.division-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.division-button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #d5ddeb;
+  border-radius: 14px;
+  background: #fafcff;
+  color: #1f3a68;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  /* on hover: the colour changes and the button grows a little, smoothly */
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  backface-visibility: hidden;
+}
+
+.division-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #e8eef8;
+  color: #1f3a68;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.division-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.division-text strong {
+  font-size: 17px;
+}
+
+.division-text small {
+  margin-top: 2px;
+  font-size: 13px;
+  color: #6a7a96;
+}
+
+.division-arrow {
+  margin-left: auto;
+  font-size: 24px;
+  color: #9aa8c0;
+}
+
+.division-button:hover {
+  border-color: #1f3a68;
+  background: #1f3a68;
+  box-shadow: 0 8px 20px rgba(31, 58, 104, 0.2);
+  transform: scale(1.06);
+}
+
+.division-button:hover .division-number {
+  background: #ffbe29;
+}
+
+.division-button:hover .division-text strong,
+.division-button:hover .division-text small,
+.division-button:hover .division-arrow {
+  color: #fff;
+}
+
 /* computer screens: a card in the middle and 2 buttons in a row */
 @media (min-width: 700px) {
   .page {
@@ -770,5 +863,11 @@ a.secondary {
 
   .welcome span {
     font-size: 22px;
+  }
+
+  /* division buttons: 2 in a row */
+  .division-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }
