@@ -139,7 +139,9 @@
 .popup-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 25, 45, 0.5);
+  background: rgba(15, 25, 45, 0.45);
+  /* the page behind the popup is a little blurred */
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -154,6 +156,76 @@
   background: #fff;
   border-radius: 16px 16px 0 0;
   padding: 20px 18px 28px;
+  box-shadow: 0 20px 50px rgba(15, 25, 45, 0.3);
+  /* the popup comes in softly */
+  animation: popup-in 0.2s ease;
+}
+
+@keyframes popup-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* popup title: number box + division name */
+.popup-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* services in the popup: paper icon, title and arrow */
+.service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.service-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1.5px solid #d5ddeb;
+  border-radius: 14px;
+  background: #fafcff;
+  color: #1f3a68;
+  text-decoration: none;
+  /* on hover only the colour changes */
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.service-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #e8eef8;
+  color: #1f3a68;
+}
+
+.service-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.service-button:hover {
+  border-color: #1f3a68;
+  background: #1f3a68;
+  color: #fff;
+}
+
+.service-button:hover .service-icon {
+  background: #ffbe29;
+  color: #1f3a68;
+}
+
+.service-button:hover .division-arrow {
+  color: #fff;
 }
 
 .popup-head {
@@ -164,6 +236,9 @@
 }
 
 .popup-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   flex-shrink: 0;
   padding: 6px 12px;
   border: 0;
@@ -173,6 +248,15 @@
   font-family: inherit;
   font-size: 14px;
   cursor: pointer;
+}
+
+/* only the X changes colour on hover */
+.close-x {
+  transition: color 0.2s;
+}
+
+.popup-close:hover .close-x {
+  color: #c62828;
 }
 
 /* ---------- service details page ---------- */
@@ -716,9 +800,8 @@ a.secondary {
   font-family: inherit;
   text-align: left;
   cursor: pointer;
-  /* on hover: the colour changes and the button grows a little, smoothly */
-  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  backface-visibility: hidden;
+  /* on hover only the colour changes */
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .division-number {
@@ -759,8 +842,6 @@ a.secondary {
 .division-button:hover {
   border-color: #1f3a68;
   background: #1f3a68;
-  box-shadow: 0 8px 20px rgba(31, 58, 104, 0.2);
-  transform: scale(1.06);
 }
 
 .division-button:hover .division-number {

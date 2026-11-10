@@ -28,7 +28,7 @@ function DivisionsPage() {
 
       <div className="division-list">
         {divisions?.map((division, index) => (
-          <button key={division.id} className="division-button" onClick={() => setOpenDivision(division)}>
+          <button key={division.id} className="division-button" onClick={() => setOpenDivision({ ...division, number: index + 1 })}>
             {/* the number of the division in a circle */}
             <span className="division-number">{index + 1}</span>
             <span className="division-text">
@@ -42,7 +42,7 @@ function DivisionsPage() {
       </div>
 
       {openDivision && (
-        <ServicesPopup lang={lang} division={openDivision} onClose={() => setOpenDivision(null)} />
+        <ServicesPopup lang={lang} division={openDivision} number={openDivision.number} onClose={() => setOpenDivision(null)} />
       )}
     </Layout>
   );
