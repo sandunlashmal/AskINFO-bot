@@ -77,7 +77,7 @@ function ServicePage() {
     forms.length === 0;
 
   return (
-    <Layout lang={lang} backTo={`/${lang}`} backText={t.backToDivisions}>
+    <Layout lang={lang} backTo={`/${lang}`} backText={t.backToDivisions} smallBack>
       <Status lang={lang} loading={loading} error={error} />
 
       {service && (

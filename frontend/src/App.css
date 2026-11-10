@@ -264,13 +264,24 @@
 .division-tag {
   display: block;
   width: fit-content;
-  margin-bottom: 6px;
-  padding: 3px 12px;
+  margin-bottom: 8px;
+  padding: 5px 16px;
   border-radius: 999px;
-  background: #e8eef8;
-  color: #1f3a68;
+  background: #1f3a68;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* a smaller back button (service page top) */
+.back-small {
+  padding: 5px 12px;
   font-size: 13px;
-  font-weight: 600;
+}
+
+.back-small .back-arrow {
+  width: 16px;
+  height: 16px;
 }
 
 .service-title-big {
@@ -279,17 +290,18 @@
 }
 
 .description {
-  margin: 6px 0 16px;
+  margin: 6px 0 24px;
   line-height: 1.6;
 }
 
 /* a white box for each part of the service */
 .box {
-  margin: 0 0 14px;
-  padding: 16px 18px;
-  border: 1px solid #dde3ee;
+  margin: 0 0 22px;
+  padding: 20px 20px 12px;
+  border: 1px solid #d3dff0;
   border-radius: 14px;
-  background: #fff;
+  /* a light blue box, so each part stands out */
+  background: #eef4fc;
 }
 
 /* box heading: small icon + words */
@@ -297,7 +309,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 0 0 12px;
+  margin: 0 0 16px;
   font-size: 16px;
   color: #1f3a68;
 }
@@ -311,7 +323,7 @@
   height: 32px;
   flex-shrink: 0;
   border-radius: 9px;
-  background: #e8eef8;
+  background: #fff;
   color: #1f3a68;
 }
 
@@ -325,7 +337,7 @@
 
 .steps li {
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   padding-left: 40px;
   line-height: 1.6;
   counter-increment: step;
@@ -357,7 +369,7 @@
 
 .documents li {
   position: relative;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   padding-left: 32px;
   line-height: 1.6;
 }
@@ -382,8 +394,8 @@
 /* fee and time boxes */
 .facts {
   display: flex;
-  gap: 10px;
-  margin: 0 0 14px;
+  gap: 14px;
+  margin: 0 0 22px;
 }
 
 .fact {
@@ -392,10 +404,10 @@
   grid-template-columns: auto 1fr;
   column-gap: 10px;
   align-items: center;
-  padding: 12px 14px;
-  border: 1px solid #dde3ee;
+  padding: 16px 16px;
+  border: 1px solid #d3dff0;
   border-radius: 14px;
-  background: #fff;
+  background: #eef4fc;
 }
 
 .fact-icon {
@@ -427,7 +439,7 @@
   padding: 12px 14px;
   border: 1.5px solid #d5ddeb;
   border-radius: 14px;
-  background: #fafcff;
+  background: #fff;
   color: #1f3a68;
   text-decoration: none;
   transition: background 0.25s ease, border-color 0.25s ease;
@@ -493,6 +505,7 @@
   padding: 7px 14px;
   border: 1px solid #c9d2e3;
   border-radius: 999px;
+  background: #fff;
   color: #1f3a68;
   font-weight: 600;
   text-decoration: none;

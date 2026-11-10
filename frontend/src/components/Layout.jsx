@@ -2,7 +2,7 @@ import { NavLink } from 'react-router';
 import { TEXTS } from '../texts';
 
 // the frame of every page: header, back link and the page content
-function Layout({ lang = 'en', backTo, backText, children }) {
+function Layout({ lang = 'en', backTo, backText, smallBack, children }) {
   const t = TEXTS[lang];
 
   return (
@@ -20,7 +20,7 @@ function Layout({ lang = 'en', backTo, backText, children }) {
 
       <main className="page-body">
         {backTo && (
-          <NavLink to={backTo} className="back">
+          <NavLink to={backTo} className={smallBack ? 'back back-small' : 'back'}>
             {/* a thick left arrow */}
             <svg className="back-arrow" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
               <path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
