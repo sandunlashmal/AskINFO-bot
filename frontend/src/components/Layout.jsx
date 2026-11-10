@@ -27,9 +27,18 @@ function Layout({ lang = 'en', backTo, backText, children }) {
         {children}
       </main>
 
-      {/* small link for the office staff who add the data */}
+      {/* footer: office name and the link for the office staff */}
       <footer className="page-footer">
-        <NavLink to="/admin">🔒 Staff login (කාර්ය මණ්ඩල පිවිසුම)</NavLink>
+        <span>© Rattota Divisional Secretariat</span>
+        <span>රත්තොට ප්‍රාදේශීය ලේකම් කාර්යාලය</span>
+        <NavLink to="/admin" className="staff-login">
+          {/* a small lock icon */}
+          <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+            <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
+            <path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" strokeWidth="2" />
+          </svg>
+          Staff login (කාර්ය මණ්ඩල පිවිසුම) →
+        </NavLink>
       </footer>
     </div>
   );
