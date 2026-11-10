@@ -562,14 +562,158 @@
   gap: 12px;
 }
 
+/* logout: a see-through pill, the words go gold under the mouse */
 .logout {
-  padding: 8px 12px;
-  border: 1px solid #fff;
-  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
   background: transparent;
   color: #fff;
   font-family: inherit;
+  font-size: 14px;
   cursor: pointer;
+  transition: color 0.25s, border-color 0.25s, background 0.25s;
+}
+
+/* mouse on logout: white button, navy words */
+.logout:hover {
+  border-color: #fff;
+  background: #fff;
+  color: #1f3a68;
+}
+
+/* on phones only "Logout" fits next to the name */
+.logout-si {
+  display: none;
+}
+
+/* ---------- admin home page ---------- */
+/* light blue welcome box in the middle, with the first letter of the name */
+.admin-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0 22px;
+  padding: 20px 18px;
+  border: 1px solid #bcd0ec;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #d9e6f8, #c6d8f2);
+  color: #1f3a68;
+  text-align: center;
+}
+
+.admin-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: #1f3a68;
+  color: #ffbe29;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.admin-welcome h2 {
+  margin: 0 0 4px;
+  font-size: 21px;
+}
+
+.admin-welcome p {
+  margin: 0;
+  color: #34446a;
+  font-size: 14.5px;
+}
+
+/* menu cards: icon, words and an arrow */
+.admin-menu {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid #dde3ee;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(31, 58, 104, 0.05);
+  color: #1f3a68;
+  text-decoration: none;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.admin-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #eef3fb;
+  color: #1f3a68;
+  transition: background 0.25s, color 0.25s;
+}
+
+.admin-card-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.admin-card-text strong {
+  font-size: 16.5px;
+}
+
+.admin-card-text small {
+  color: #5a6478;
+  font-size: 13px;
+}
+
+.admin-card-arrow {
+  color: #9aa6bb;
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* mouse on a card: navy, gold icon (colour only, no zoom) */
+.admin-card:hover {
+  border-color: #1f3a68;
+  background: #1f3a68;
+}
+
+.admin-card:hover .admin-card-icon {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffbe29;
+}
+
+.admin-card:hover .admin-card-text strong,
+.admin-card:hover .admin-card-text small,
+.admin-card:hover .admin-card-arrow {
+  color: #fff;
+}
+
+/* the back button in the middle, under the cards */
+.admin-back-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.admin-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
 }
 
 /* the login page: a notice on top and a white card in the middle */
@@ -1178,6 +1322,14 @@ a.secondary {
   .menu {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  .admin-menu {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .logout-si {
+    display: inline;
   }
 
   /* the popup is a box in the middle, services one under the other */
