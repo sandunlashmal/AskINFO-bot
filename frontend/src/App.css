@@ -260,10 +260,22 @@
 }
 
 /* ---------- service details page ---------- */
-.label {
-  margin: 0 0 4px;
+/* the division as a small tag above the service name */
+.division-tag {
+  display: block;
+  width: fit-content;
+  margin-bottom: 6px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: #e8eef8;
+  color: #1f3a68;
   font-size: 13px;
-  color: #5a6478;
+  font-weight: 600;
+}
+
+.service-title-big {
+  margin: 0 0 6px;
+  font-size: 24px;
 }
 
 .description {
@@ -274,27 +286,97 @@
 /* a white box for each part of the service */
 .box {
   margin: 0 0 14px;
-  padding: 14px 16px;
+  padding: 16px 18px;
   border: 1px solid #dde3ee;
-  border-radius: 10px;
+  border-radius: 14px;
+  background: #fff;
 }
 
-.box h3 {
-  margin: 0 0 10px;
+/* box heading: small icon + words */
+.box-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
   font-size: 16px;
   color: #1f3a68;
 }
 
-.steps,
+.box-icon,
+.fact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  background: #e8eef8;
+  color: #1f3a68;
+}
+
+/* steps: a navy number in a circle for each step */
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.steps li {
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 40px;
+  line-height: 1.6;
+  counter-increment: step;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #1f3a68;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* documents: a green tick for each one */
 .documents {
   margin: 0;
-  padding-left: 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.documents li {
+  position: relative;
+  margin-bottom: 8px;
+  padding-left: 32px;
   line-height: 1.6;
 }
 
-.steps li,
-.documents li {
-  margin-bottom: 6px;
+.documents li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #e3f4ea;
+  color: #1e7a46;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 /* fee and time boxes */
@@ -306,13 +388,21 @@
 
 .fact {
   flex: 1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  align-items: center;
   padding: 12px 14px;
-  border-radius: 10px;
-  background: #eef1f6;
+  border: 1px solid #dde3ee;
+  border-radius: 14px;
+  background: #fff;
 }
 
-.fact span {
-  display: block;
+.fact-icon {
+  grid-row: span 2;
+}
+
+.fact span:not(.fact-icon) {
   font-size: 13px;
   color: #5a6478;
 }
@@ -322,24 +412,66 @@
   color: #1f3a68;
 }
 
-/* PDF download buttons */
+/* PDF download: red file picture, name and a gold download button */
 .downloads {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .download {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
   padding: 12px 14px;
-  border-radius: 10px;
-  background: #1f3a68;
-  color: #fff;
+  border: 1.5px solid #d5ddeb;
+  border-radius: 14px;
+  background: #fafcff;
+  color: #1f3a68;
   text-decoration: none;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.pdf-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 6px 14px 6px 6px;
+  background: #d93025;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.download-name {
+  /* on small phones the button goes under the name */
+  flex: 1 1 150px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #ffbe29;
+  color: #1f3a68;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .download:hover {
-  background: #2c4f8c;
+  border-color: #1f3a68;
+  background: #eef3fb;
 }
 
 .officer-name {
@@ -348,20 +480,35 @@
 }
 
 .officer-role {
-  margin: 2px 0 8px;
+  margin: 2px 0 10px;
   color: #5a6478;
 }
 
+/* phone and email as small buttons */
 .contact {
-  display: block;
-  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 8px 0 0;
+  padding: 7px 14px;
+  border: 1px solid #c9d2e3;
+  border-radius: 999px;
   color: #1f3a68;
+  font-weight: 600;
   text-decoration: none;
 }
 
+.contact:hover {
+  border-color: #1f3a68;
+  background: #1f3a68;
+  color: #fff;
+}
+
+/* the back button at the end of the page, in the middle */
 .bottom-back {
-  margin-top: 8px;
-  text-align: center;
+  display: flex;
+  width: fit-content;
+  margin: 18px auto 0;
 }
 
 /* ---------- footer and admin pages ---------- */

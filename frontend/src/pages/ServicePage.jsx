@@ -15,6 +15,37 @@ function toLines(text) {
     .filter((line) => line !== '');
 }
 
+// the word on the PDF download button
+const DOWNLOAD = { en: 'Download', si: 'බාගත කරන්න', ta: 'பதிவிறக்கவும்' };
+
+// small line icons for the box headings (24 x 24 drawings)
+const ICONS = {
+  steps: 'M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01',
+  documents: 'M7 3h7l5 5v13H7z M14 3v5h5',
+  forms: 'M12 4v11 M7 10l5 5 5-5 M5 20h14',
+  officer: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21c0-4 4-6 8-6s8 2 8 6',
+  fee: 'M6 3h12v18l-3-2-3 2-3-2-3 2z M9 8h6 M9 12h6',
+  time: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 7v5l3 2',
+};
+
+function Icon({ name, size = 18 }) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true">
+      <path d={ICONS[name]} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+// a box heading with its icon
+function BoxTitle({ icon, children }) {
+  return (
+    <h3 className="box-title">
+      <span className="box-icon"><Icon name={icon} /></span>
+      {children}
+    </h3>
+  );
+}
+
 // page 3: full details of one service
 function ServicePage() {
   // e.g. /si/services/5 gives lang = 'si' and serviceId = '5'
@@ -51,8 +82,9 @@ function ServicePage() {
 
       {service && (
         <>
-          <p className="label">{service.division_name}</p>
-          <h2 className="title">{service.title}</h2>
+          {/* the division as a small tag, then the service name */}
+          <span className="division-tag">{service.division_name}</span>
+          <h2 className="title service-title-big">{service.title}</h2>
           {service.description && <p className="description">{service.description}</p>}
 
           {noDetails && <p className="note">{t.noDetails}</p>}
@@ -60,7 +92,7 @@ function ServicePage() {
           {/* the steps, numbered 1, 2, 3 ... */}
           {steps.length > 0 && (
             <section className="box">
-              <h3>{t.steps}</h3>
+              <BoxTitle icon="steps">{t.steps}</BoxTitle>
               <ol className="steps">
                 {steps.map((step, index) => (
                   <li key={index}>{step}</li>
@@ -71,7 +103,7 @@ function ServicePage() {
 
           {documents.length > 0 && (
             <section className="box">
-              <h3>{t.documents}</h3>
+              <BoxTitle icon="documents">{t.documents}</BoxTitle>
               <ul className="documents">
                 {documents.map((doc, index) => (
                   <li key={index}>{doc}</li>
@@ -85,12 +117,14 @@ function ServicePage() {
             <div className="facts">
               {service.fee && (
                 <div className="fact">
+                  <span className="fact-icon"><Icon name="fee" /></span>
                   <span>{t.fee}</span>
                   <b>{service.fee}</b>
                 </div>
               )}
               {service.processing_time && (
                 <div className="fact">
+                  <span className="fact-icon"><Icon name="time" /></span>
                   <span>{t.time}</span>
                   <b>{service.processing_time}</b>
                 </div>
@@ -101,11 +135,17 @@ function ServicePage() {
           {/* PDF forms: each one opens or downloads the file */}
           {forms.length > 0 && (
             <section className="box">
-              <h3>{t.forms}</h3>
+              <BoxTitle icon="forms">{t.forms}</BoxTitle>
               <div className="downloads">
                 {forms.map((form) => (
                   <a key={form.id} href={form.url} target="_blank" rel="noreferrer" className="download">
-                    ⬇ {form.title} (PDF)
+                    {/* a red PDF file picture */}
+                    <span className="pdf-icon">PDF</span>
+                    <span className="download-name">{form.title}</span>
+                    <span className="download-button">
+                      <Icon name="forms" size={16} />
+                      {DOWNLOAD[lang]}
+                    </span>
                   </a>
                 ))}
               </div>
@@ -114,7 +154,7 @@ function ServicePage() {
 
           {officer && (
             <section className="box">
-              <h3>{t.officer}</h3>
+              <BoxTitle icon="officer">{t.officer}</BoxTitle>
               <p className="officer-name">{officer.name}</p>
               {officer.designation && <p className="officer-role">{officer.designation}</p>}
               {/* tel: and mailto: open the phone or email app */}
@@ -131,8 +171,11 @@ function ServicePage() {
             </section>
           )}
 
-          <NavLink to={`/${lang}`} className="menu-item bottom-back">
-            ← {t.backToDivisions}
+          <NavLink to={`/${lang}`} className="back bottom-back">
+            <svg className="back-arrow" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            {t.backToDivisions}
           </NavLink>
         </>
       )}
