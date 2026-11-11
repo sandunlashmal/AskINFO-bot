@@ -25,6 +25,8 @@ function DivisionsPage() {
     <Layout lang={lang} backTo="/" backText={t.changeLanguage}>
       <h2 className="question division-question">{t.chooseDivision}</h2>
       <Status lang={lang} loading={loading} error={error} />
+      {/* no divisions in the database yet */}
+      {divisions?.length === 0 && <p className="note">{t.noDivisions}</p>}
 
       <div className="division-list">
         {divisions?.map((division, index) => (

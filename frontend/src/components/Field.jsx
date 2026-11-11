@@ -1,20 +1,23 @@
+import SelectBox from './SelectBox';
+
 // one form box with its label: text, email, password, number, long text or a list
 // options = [{ value: 1, label: 'Land' }, ...] for type="select" (empty = the first line)
 // translate = { from: 'English text', to: 'si' or 'ta' } shows a Google Translate link
 function Field({ label, type = 'text', value, onChange, rows, required, autoComplete, translate, options, emptyLabel = '-- Choose (තෝරන්න) --' }) {
+  // a list: our own drop-down (a div, not a label, so a click on a line does not open it again)
+  if (type === 'select') {
+    return (
+      <div className="field">
+        {label}
+        <SelectBox value={value} onChange={onChange} options={options} emptyLabel={emptyLabel} required={required} />
+      </div>
+    );
+  }
+
   return (
     <label className="field">
       {label}
-      {type === 'select' ? (
-        <select value={value} onChange={(event) => onChange(event.target.value)} required={required}>
-          <option value="">{emptyLabel}</option>
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      ) : type === 'textarea' ? (
+      {type === 'textarea' ? (
         <textarea
           value={value}
           rows={rows || 4}

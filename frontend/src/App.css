@@ -1442,12 +1442,21 @@ a.secondary {
 
 /* computer screens: a card in the middle and 2 buttons in a row */
 @media (min-width: 700px) {
+  /* no "overflow: hidden" here, so an open list can go below the page box */
   .page {
     min-height: auto;
     margin: 40px auto;
     border-radius: 14px;
-    overflow: hidden;
     box-shadow: 0 6px 24px rgba(31, 58, 104, 0.12);
+  }
+
+  /* round corners on the navy top and bottom parts instead */
+  .page-header {
+    border-radius: 14px 14px 0 0;
+  }
+
+  .page-footer {
+    border-radius: 0 0 14px 14px;
   }
 
   .page-header {
@@ -1673,4 +1682,163 @@ a.secondary {
 
 .confirm-yes:disabled {
   opacity: 0.6;
+}
+
+/* ---------- our own drop-down list (admin forms) ---------- */
+.select-box {
+  position: relative;
+}
+
+/* the closed box: looks like the other boxes, with a down arrow */
+.select-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #d3dbe8;
+  border-radius: 12px;
+  background: #f7f9fc;
+  color: #1c2433;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.select-button:hover,
+.select-button:focus-visible,
+.select-button.open {
+  border-color: #1f3a68;
+  background: #fff;
+  outline: none;
+}
+
+.select-arrow {
+  flex-shrink: 0;
+  color: #1f3a68;
+  transition: transform 0.2s;
+}
+
+/* the arrow turns up when the list is open */
+.select-button.open .select-arrow {
+  transform: rotate(180deg);
+}
+
+/* the words: division small and grey on top, name under it */
+.select-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.select-text small {
+  color: #6a7891;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.select-empty {
+  color: #8a96ab;
+}
+
+/* the open list: a white card under the box */
+.select-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  max-height: 300px;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  list-style: none;
+  border: 1px solid #dde3ee;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(31, 58, 104, 0.16);
+}
+
+.select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #1c2433;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+/* mouse or keys on a line: light blue */
+.select-option:hover,
+.select-option.active {
+  background: #eef3fb;
+}
+
+/* the chosen line: navy words and a tick */
+.select-option.selected {
+  background: #e3ecf9;
+  color: #1f3a68;
+  font-weight: 700;
+}
+
+.select-option.selected svg {
+  flex-shrink: 0;
+  color: #1f3a68;
+}
+
+/* the hidden box for "please choose" (it can not be seen or clicked) */
+.select-required {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* very long words (an email, a long name) break onto the next line,
+   so nothing goes out of its box or makes the page scroll sideways */
+.division-button,
+.division-text,
+.service-button,
+.service-title,
+.popup-title,
+.service-title-big,
+.description,
+.box,
+.fact,
+.fact span,
+.fact b,
+.download,
+.download-name,
+.contact,
+.officer-name,
+.officer-role,
+.select-text,
+.confirm-name,
+.admin-welcome h2 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* the email link may get smaller than its text */
+.contact {
+  max-width: 100%;
 }
