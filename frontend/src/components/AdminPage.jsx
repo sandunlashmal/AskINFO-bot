@@ -16,7 +16,11 @@ function AdminPage({ title, children }) {
   return (
     <AdminLayout adminName={admin?.name}>
       <NavLink to="/admin/home" className="back">
-        ← Back to menu (මෙනුව වෙත ආපසු)
+        {/* a thick arrow, it goes gold under the mouse */}
+        <svg className="back-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M20 12H5M11 5l-7 7 7 7" />
+        </svg>
+        Back to menu (මෙනුව වෙත ආපසු)
       </NavLink>
       <h2 className="title">{title}</h2>
 

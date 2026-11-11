@@ -87,14 +87,17 @@ function AdminDivisionsPage() {
     return (
       <AdminPage title={editing.id ? 'Edit division (අංශය සංස්කරණය)' : 'Add division (අංශයක් එක් කිරීම)'}>
         <form className="admin-form" onSubmit={save}>
+          <h3 className="form-part">1. Name (නම)</h3>
           <Field label="Name in English (නම ඉංග්‍රීසියෙන්) *" value={editing.name} onChange={(value) => change('name', value)} required />
           <Field label="Name in Sinhala (නම සිංහලෙන්)" value={editing.name_si} onChange={(value) => change('name_si', value)} translate={{ from: editing.name, to: 'si' }} />
           <Field label="Name in Tamil (නම දෙමළෙන්)" value={editing.name_ta} onChange={(value) => change('name_ta', value)} translate={{ from: editing.name, to: 'ta' }} />
 
+          <h3 className="form-part">2. Description (විස්තරය)</h3>
           <Field label="Description in English (විස්තරය ඉංග්‍රීසියෙන්)" type="textarea" rows={3} value={editing.description} onChange={(value) => change('description', value)} />
           <Field label="Description in Sinhala (විස්තරය සිංහලෙන්)" type="textarea" rows={3} value={editing.description_si} onChange={(value) => change('description_si', value)} translate={{ from: editing.description, to: 'si' }} />
           <Field label="Description in Tamil (විස්තරය දෙමළෙන්)" type="textarea" rows={3} value={editing.description_ta} onChange={(value) => change('description_ta', value)} translate={{ from: editing.description, to: 'ta' }} />
 
+          <h3 className="form-part">3. Place in the menu (මෙනුවේ ස්ථානය)</h3>
           <Field label="Place in the menu: 1, 2, 3 ... (මෙනුවේ ස්ථානය)" type="number" value={editing.sort_order} onChange={(value) => change('sort_order', value)} />
           <p className="note">Empty = at the end. (හිස්ව තැබුවහොත් අවසානයට එක් වේ.)</p>
 
@@ -134,16 +137,21 @@ function AdminDivisionsPage() {
           {divisions.map((division) => (
             <div key={division.id} className="admin-row">
               <div className="admin-row-text">
-                <strong>{division.sort_order}. {division.name}</strong>
+                <strong>
+                  <span className="row-number">{division.sort_order}</span>
+                  {division.name}
+                </strong>
                 {/* show what is missing, so the staff can fill it */}
                 <small>{division.name_si || '⚠ No Sinhala name (සිංහල නම නැත)'}</small>
                 <small>{division.name_ta || '⚠ No Tamil name (දෙමළ නම නැත)'}</small>
               </div>
               <div className="admin-row-buttons">
                 <button className="secondary" type="button" onClick={() => openForm(division)}>
+                  <Icon path="M4 20h4L19 9l-4-4L4 16z M14 6l4 4" />
                   Edit (සංස්කරණය)
                 </button>
                 <button className="danger" type="button" onClick={() => remove(division)}>
+                  <Icon path="M4 7h16 M10 11v6 M14 11v6 M6 7l1 13h10l1-13 M9 7V4h6v3" />
                   Delete (ඉවත් කරන්න)
                 </button>
               </div>
@@ -152,6 +160,15 @@ function AdminDivisionsPage() {
         </div>
       )}
     </AdminPage>
+  );
+}
+
+// a small line icon
+function Icon({ path, size = 16 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={path} />
+    </svg>
   );
 }
 

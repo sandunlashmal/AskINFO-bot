@@ -37,9 +37,14 @@ function Field({ label, type = 'text', value, onChange, rows, required, autoComp
 
 // opens Google Translate in a new tab with the English text in it
 function TranslateLink({ from, to }) {
-  // nothing to translate yet
+  // nothing to translate yet: a grey button that does nothing
   if (!from) {
-    return <small className="translate-note">🌐 Type the English first. (පළමුව ඉංග්‍රීසියෙන් ඇතුළත් කරන්න.)</small>;
+    return (
+      <small className="translate-note">
+        <span className="translate-link translate-off">🌐 Google Translate</span>{' '}
+        Type the English first. (පළමුව ඉංග්‍රීසියෙන් ඇතුළත් කරන්න.)
+      </small>
+    );
   }
 
   const url = `https://translate.google.com/?sl=en&tl=${to}&text=${encodeURIComponent(from)}&op=translate`;

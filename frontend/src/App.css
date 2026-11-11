@@ -917,28 +917,48 @@
 }
 
 /* ---------- Step 6: admin forms ---------- */
+/* the form is a white card */
 .admin-form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  max-width: 520px;
+  gap: 16px;
+  padding: 20px 20px 22px;
+  border: 1px solid #e1e7f1;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(31, 58, 104, 0.07);
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 15px;
+  gap: 7px;
+  color: #33405a;
+  font-size: 14.5px;
+  font-weight: 600;
 }
 
+/* soft grey boxes, navy line when you type */
 .field input,
 .field textarea,
 .field select {
-  padding: 11px 13px;
-  border: 1px solid #c9d2e3;
-  border-radius: 10px;
+  padding: 12px 14px;
+  border: 1.5px solid #d3dbe8;
+  border-radius: 12px;
+  background: #f7f9fc;
+  color: #1c2433;
   font-size: 16px;
+  font-weight: 400;
   font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: #1f3a68;
+  background: #fff;
 }
 
 .field select {
@@ -970,35 +990,91 @@
 }
 
 /* ---------- Step 6.2: admin lists (divisions, officers ...) ---------- */
+/* some space under the title of an admin page */
+.back + .title {
+  margin-bottom: 16px;
+}
+
+/* "+ Add" button: navy, the words go gold under the mouse */
 .add-button {
   width: 100%;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: color 0.25s;
+}
+
+.add-button:hover {
+  color: #ffbe29;
 }
 
 .admin-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
+/* one white card for each item */
 .admin-row {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 14px;
-  border: 1px solid #dfe5f0;
-  border-radius: 10px;
+  gap: 12px;
+  padding: 16px 18px;
+  border: 1px solid #e1e7f1;
+  border-radius: 14px;
   background: #fff;
+  box-shadow: 0 2px 8px rgba(31, 58, 104, 0.05);
+  transition: border-color 0.25s;
+}
+
+/* every second card is light blue, so the rows are easy to tell apart */
+.admin-row:nth-child(even) {
+  background: #f2f6fd;
+}
+
+.admin-row:hover {
+  border-color: #9fb3d4;
 }
 
 .admin-row-text {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
+}
+
+.admin-row-text strong {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+  color: #1f3a68;
+  font-size: 16.5px;
 }
 
 .admin-row-text small {
   color: #5b6b85;
+  font-size: 13.5px;
+}
+
+/* the navy number in a circle */
+.row-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1f3a68;
+  color: #ffbe29;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Sinhala and Tamil names in line with the English name */
+.admin-row-text strong + small,
+.admin-row-text strong + small + small {
+  padding-left: 38px;
 }
 
 .admin-row-buttons,
@@ -1012,34 +1088,78 @@
   flex: 1;
 }
 
+/* Edit and Delete: small round buttons with an icon */
 .secondary,
 .danger {
-  padding: 10px 12px;
-  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: 999px;
   background: #fff;
-  font-size: 14px;
+  font-size: 13.5px;
+  font-weight: 600;
   font-family: inherit;
   cursor: pointer;
+  transition: background 0.25s, color 0.25s;
 }
 
 .secondary {
-  border: 1px solid #1f3a68;
+  border: 1.5px solid #1f3a68;
   color: #1f3a68;
 }
 
 .danger {
-  border: 1px solid #b3261e;
-  color: #b3261e;
+  border: 1.5px solid #c62828;
+  color: #c62828;
 }
 
+/* on phones the icon is hidden, so the words fit */
+.admin-row-buttons svg {
+  display: none;
+}
+
+.admin-row-buttons button {
+  padding: 9px 8px;
+  font-size: 13px;
+}
+
+/* mouse on them: filled with colour (no zoom) */
+.secondary:hover {
+  background: #1f3a68;
+  color: #fff;
+}
+
+.danger:hover {
+  background: #c62828;
+  color: #fff;
+}
+
+.form-buttons {
+  margin-top: 4px;
+}
+
+.form-buttons .primary,
 .form-buttons .secondary {
+  border-radius: 12px;
   font-size: 16px;
+  font-weight: 700;
+}
+
+.form-buttons .primary {
+  transition: color 0.25s;
+}
+
+.form-buttons .primary:hover:not(:disabled) {
+  color: #ffbe29;
 }
 
 /* Google Translate link under the Sinhala and Tamil boxes */
 .translate-note {
   color: #5b6b85;
-  font-size: 13px;
+  font-size: 12.5px;
+  font-weight: 400;
   line-height: 1.5;
 }
 
@@ -1054,14 +1174,28 @@
   text-decoration: none;
 }
 
+/* the button before the English is typed: grey, can not click */
+.translate-off {
+  border-color: #c3cad6;
+  color: #8a96ab;
+  cursor: not-allowed;
+}
+
 /* ---------- Step 6.4: services form ---------- */
 /* a small heading for each part of a long form */
+/* a light blue strip with a navy line on the left */
 .form-part {
-  margin: 12px 0 0;
-  padding-top: 12px;
-  border-top: 1px solid #dfe5f0;
+  margin: 10px 0 0;
+  padding: 9px 14px;
+  border-left: 4px solid #1f3a68;
+  border-radius: 8px;
+  background: #eef3fb;
   color: #1f3a68;
-  font-size: 17px;
+  font-size: 16px;
+}
+
+.form-part:first-child {
+  margin-top: 0;
 }
 
 /* the "Show division" list above the services */
@@ -1356,10 +1490,17 @@ a.secondary {
 
   .admin-row-buttons button {
     flex: none;
+    padding: 9px 14px;
+    font-size: 13.5px;
+  }
+
+  .admin-row-buttons svg {
+    display: block;
   }
 
   .add-button {
     width: auto;
+    padding: 12px 22px;
   }
 
   /* language buttons: 3 cards in a row */
