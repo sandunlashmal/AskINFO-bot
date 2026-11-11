@@ -1544,3 +1544,111 @@ a.secondary {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ---------- "Delete?" popup on admin pages ---------- */
+.confirm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(20, 32, 56, 0.45);
+  backdrop-filter: blur(3px);
+}
+
+.confirm-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 26px 22px 22px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 20px 50px rgba(20, 32, 56, 0.3);
+  text-align: center;
+  animation: popup-in 0.2s ease-out;
+}
+
+.confirm-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  background: #fdecea;
+  color: #c62828;
+}
+
+.confirm-title {
+  margin: 0 0 12px;
+  color: #1f3a68;
+  font-size: 18px;
+}
+
+/* the Sinhala question on its own line */
+.confirm-title span {
+  display: block;
+  margin-top: 2px;
+  font-size: 16px;
+}
+
+/* the name of the item in a grey box */
+.confirm-name {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f2f5fa;
+  color: #1c2433;
+  font-weight: 700;
+}
+
+.confirm-warning {
+  margin: 0 0 20px;
+  color: #c62828;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.confirm-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.confirm-buttons button {
+  flex: 1;
+  padding: 12px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+}
+
+.confirm-no {
+  border: 1.5px solid #1f3a68;
+  background: #fff;
+  color: #1f3a68;
+}
+
+.confirm-no:hover {
+  background: #1f3a68;
+  color: #fff;
+}
+
+.confirm-yes {
+  border: 1.5px solid #c62828;
+  background: #c62828;
+  color: #fff;
+}
+
+.confirm-yes:hover:not(:disabled) {
+  border-color: #a31f1f;
+  background: #a31f1f;
+}
+
+.confirm-yes:disabled {
+  opacity: 0.6;
+}

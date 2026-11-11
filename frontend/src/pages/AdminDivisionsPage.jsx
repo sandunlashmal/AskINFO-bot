@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import AdminPage from '../components/AdminPage';
 import Field from '../components/Field';
+import ConfirmDelete from '../components/ConfirmDelete';
 import { sendJSON, useApi } from '../api';
 
 // an empty form for a new division
@@ -20,6 +21,8 @@ function AdminDivisionsPage() {
   const [editing, setEditing] = useState(null);
   const [message, setMessage] = useState(null); // { ok: true/false, text: '...' }
   const [busy, setBusy] = useState(false);
+  // the division in the "Delete?" popup (null = no popup)
+  const [toDelete, setToDelete] = useState(null);
 
   // open the form (empty for a new one, filled for an old one)
   function openForm(division) {
@@ -57,12 +60,10 @@ function AdminDivisionsPage() {
       .finally(() => setBusy(false));
   }
 
+  // the user said "Delete" in the popup
   function remove(division) {
-    // ask first, a delete can not be undone
-    if (!window.confirm(`Delete "${division.name}"? (මෙම අංශය ඉවත් කරන්නද?)`)) {
-      return;
-    }
     setMessage(null);
+    setBusy(true);
     sendJSON(`admin/divisions.php?id=${division.id}`, 'DELETE')
       .then(() => {
         setMessage({ ok: true, text: 'Deleted. (ඉවත් කරන ලදී.)' });
@@ -77,6 +78,10 @@ function AdminDivisionsPage() {
         } else {
           setMessage({ ok: false, text: error.message });
         }
+      })
+      .finally(() => {
+        setBusy(false);
+        setToDelete(null);
       });
   }
 
@@ -150,7 +155,7 @@ function AdminDivisionsPage() {
                   <Icon path="M4 20h4L19 9l-4-4L4 16z M14 6l4 4" />
                   Edit (සංස්කරණය)
                 </button>
-                <button className="danger" type="button" onClick={() => remove(division)}>
+                <button className="danger" type="button" onClick={() => setToDelete(division)}>
                   <Icon path="M4 7h16 M10 11v6 M14 11v6 M6 7l1 13h10l1-13 M9 7V4h6v3" />
                   Delete (ඉවත් කරන්න)
                 </button>
@@ -158,6 +163,18 @@ function AdminDivisionsPage() {
             </div>
           ))}
         </div>
+      )}
+
+      {/* ask first, a delete can not be undone */}
+      {toDelete && (
+        <ConfirmDelete
+          title="Delete this division?"
+          titleSi="මෙම අංශය ඉවත් කරන්නද?"
+          name={toDelete.name_si ? `${toDelete.name} (${toDelete.name_si})` : toDelete.name}
+          busy={busy}
+          onYes={() => remove(toDelete)}
+          onNo={() => setToDelete(null)}
+        />
       )}
     </AdminPage>
   );
