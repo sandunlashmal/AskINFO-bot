@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import AdminPage from '../components/AdminPage';
 import Field from '../components/Field';
+import ConfirmDelete from '../components/ConfirmDelete';
 import { sendJSON, uploadFile, useApi } from '../api';
 
 // admin page: upload and delete the PDF forms of a service
@@ -23,6 +24,9 @@ function AdminFormsPage() {
   const [fileBoxKey, setFileBoxKey] = useState(0);
   const [message, setMessage] = useState(null); // { ok: true/false, text: '...' }
   const [busy, setBusy] = useState(false);
+  // the form in the "Delete?" popup (null = no popup)
+  const [toDelete, setToDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
   function chooseService(value) {
     setServiceId(value);
@@ -64,18 +68,20 @@ function AdminFormsPage() {
       .finally(() => setBusy(false));
   }
 
+  // the user said "Delete" in the popup
   function remove(form) {
-    // ask first, a delete can not be undone
-    if (!window.confirm(`Delete "${form.title}"? (මෙම අයදුම්පත ඉවත් කරන්නද?)`)) {
-      return;
-    }
     setMessage(null);
+    setDeleting(true);
     sendJSON(`admin/forms.php?id=${form.id}`, 'DELETE')
       .then(() => {
         setMessage({ ok: true, text: 'Deleted. (ඉවත් කරන ලදී.)' });
         setReload(reload + 1);
       })
-      .catch((error) => setMessage({ ok: false, text: error.message }));
+      .catch((error) => setMessage({ ok: false, text: error.message }))
+      .finally(() => {
+        setDeleting(false);
+        setToDelete(null);
+      });
   }
 
   // the services as { value, label }, e.g. "Registrar · Birth certificate copy"
@@ -115,10 +121,12 @@ function AdminFormsPage() {
                   </div>
                   <div className="admin-row-buttons">
                     <a className="secondary" href={form.url} target="_blank" rel="noreferrer">
+                      <Icon path="M14 4h6v6 M20 4l-9 9 M18 14v6H4V6h6" />
                       Open (විවෘත කරන්න)
                     </a>
-                    <button className="danger" type="button" onClick={() => remove(form)}>
-                      Delete (ඉවත් කරන්න)
+                    <button className="danger" type="button" onClick={() => setToDelete(form)}>
+                      <Icon path="M4 7h16 M10 11v6 M14 11v6 M6 7l1 13h10l1-13 M9 7V4h6v3" />
+                  Delete (ඉවත් කරන්න)
                     </button>
                   </div>
                 </div>
@@ -150,7 +158,27 @@ function AdminFormsPage() {
           </form>
         </>
       )}
+      {/* ask first, a delete can not be undone */}
+      {toDelete && (
+        <ConfirmDelete
+          title="Delete this PDF form?"
+          titleSi="මෙම අයදුම්පත ඉවත් කරන්නද?"
+          name={toDelete.title_si ? `${toDelete.title} (${toDelete.title_si})` : toDelete.title}
+          busy={deleting}
+          onYes={() => remove(toDelete)}
+          onNo={() => setToDelete(null)}
+        />
+      )}
     </AdminPage>
+  );
+}
+
+// a small line icon
+function Icon({ path, size = 16 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={path} />
+    </svg>
   );
 }
 

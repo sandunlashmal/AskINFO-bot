@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 
 // a popup that asks "Delete this?" before deleting
-// title = English question, titleSi = Sinhala question, name = the item, onYes / onNo = what to do
-function ConfirmDelete({ title, titleSi, name, busy, onYes, onNo }) {
+// title = English question, titleSi = Sinhala question, name = the item,
+// note = an extra warning (can be empty), onYes / onNo = what to do
+function ConfirmDelete({ title, titleSi, name, note, busy, onYes, onNo }) {
   // the Esc key closes the popup
   useEffect(() => {
     function onKey(event) {
@@ -28,6 +29,7 @@ function ConfirmDelete({ title, titleSi, name, busy, onYes, onNo }) {
           <span>{titleSi}</span>
         </h3>
         <p className="confirm-name">{name}</p>
+        {note && <p className="confirm-note">{note}</p>}
         <p className="confirm-warning">
           This can not be undone.
           <br />

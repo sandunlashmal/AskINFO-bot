@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import AdminPage from '../components/AdminPage';
 import Field from '../components/Field';
+import ConfirmDelete from '../components/ConfirmDelete';
 import { sendJSON, useApi } from '../api';
 
 // an empty form for a new officer
@@ -22,6 +23,9 @@ function AdminOfficersPage() {
   const [editing, setEditing] = useState(null);
   const [message, setMessage] = useState(null); // { ok: true/false, text: '...' }
   const [busy, setBusy] = useState(false);
+  // the officer in the "Delete?" popup (null = no popup)
+  const [toDelete, setToDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
   // open the form (empty for a new one, filled for an old one)
   function openForm(officer) {
@@ -59,18 +63,20 @@ function AdminOfficersPage() {
       .finally(() => setBusy(false));
   }
 
+  // the user said "Delete" in the popup
   function remove(officer) {
-    // ask first, a delete can not be undone
-    if (!window.confirm(`Delete "${officer.name}"? (මෙම නිලධාරියා ඉවත් කරන්නද?)`)) {
-      return;
-    }
     setMessage(null);
+    setDeleting(true);
     sendJSON(`admin/officers.php?id=${officer.id}`, 'DELETE')
       .then(() => {
         setMessage({ ok: true, text: 'Deleted. (ඉවත් කරන ලදී.)' });
         setReload(reload + 1);
       })
-      .catch((error) => setMessage({ ok: false, text: error.message }));
+      .catch((error) => setMessage({ ok: false, text: error.message }))
+      .finally(() => {
+        setDeleting(false);
+        setToDelete(null);
+      });
   }
 
   const note = message && <p className={message.ok ? 'note success' : 'note error'}>{message.text}</p>;
@@ -141,9 +147,11 @@ function AdminOfficersPage() {
               </div>
               <div className="admin-row-buttons">
                 <button className="secondary" type="button" onClick={() => openForm(officer)}>
+                  <Icon path="M4 20h4L19 9l-4-4L4 16z M14 6l4 4" />
                   Edit (සංස්කරණය)
                 </button>
-                <button className="danger" type="button" onClick={() => remove(officer)}>
+                <button className="danger" type="button" onClick={() => setToDelete(officer)}>
+                  <Icon path="M4 7h16 M10 11v6 M14 11v6 M6 7l1 13h10l1-13 M9 7V4h6v3" />
                   Delete (ඉවත් කරන්න)
                 </button>
               </div>
@@ -151,7 +159,27 @@ function AdminOfficersPage() {
           ))}
         </div>
       )}
+      {/* ask first, a delete can not be undone */}
+      {toDelete && (
+        <ConfirmDelete
+          title="Delete this officer?"
+          titleSi="මෙම නිලධාරියා ඉවත් කරන්නද?"
+          name={toDelete.name}
+          busy={deleting}
+          onYes={() => remove(toDelete)}
+          onNo={() => setToDelete(null)}
+        />
+      )}
     </AdminPage>
+  );
+}
+
+// a small line icon
+function Icon({ path, size = 16 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d={path} />
+    </svg>
   );
 }
 

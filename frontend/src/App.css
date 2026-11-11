@@ -1012,6 +1012,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-bottom: 18px;
 }
 
 /* one white card for each item */
@@ -1040,6 +1041,10 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  /* long words go to the next line, they never push the buttons out */
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .admin-row-text strong {
@@ -1071,9 +1076,8 @@
   font-weight: 700;
 }
 
-/* Sinhala and Tamil names in line with the English name */
-.admin-row-text strong + small,
-.admin-row-text strong + small + small {
+/* rows with a number circle: the small lines start under the name */
+.admin-row-text:has(.row-number) small {
   padding-left: 38px;
 }
 
@@ -1081,6 +1085,11 @@
 .form-buttons {
   display: flex;
   gap: 8px;
+}
+
+/* the buttons keep their size and stay inside the card */
+.admin-row-buttons {
+  flex-shrink: 0;
 }
 
 .admin-row-buttons button,
@@ -1486,6 +1495,7 @@ a.secondary {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
   }
 
   .admin-row-buttons button {
@@ -1560,7 +1570,7 @@ a.secondary {
 
 .confirm-box {
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
   padding: 26px 22px 22px;
   border-radius: 18px;
   background: #fff;
@@ -1602,6 +1612,18 @@ a.secondary {
   background: #f2f5fa;
   color: #1c2433;
   font-weight: 700;
+}
+
+/* an extra warning, e.g. "its PDF forms go too" */
+.confirm-note {
+  margin: 0 0 10px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #fff4e5;
+  color: #8a5a00;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .confirm-warning {
