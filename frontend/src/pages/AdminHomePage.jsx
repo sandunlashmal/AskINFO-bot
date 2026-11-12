@@ -13,13 +13,12 @@ const ICONS = {
 };
 
 // the admin pages
-// "Email settings" comes back after Step 6.6:
-// { icon: 'email', en: 'Email settings', si: 'ඊමේල් සැකසුම්', to: '/admin/email' },
 const ADMIN_MENU = [
   { icon: 'services', en: 'Services', si: 'සේවා', to: '/admin/services' },
   { icon: 'divisions', en: 'Divisions', si: 'අංශ', to: '/admin/divisions' },
   { icon: 'officers', en: 'Officers', si: 'නිලධාරීන්', to: '/admin/officers' },
   { icon: 'forms', en: 'PDF forms', si: 'අයදුම්පත්', to: '/admin/forms' },
+  { icon: 'email', en: 'Email settings', si: 'ඊමේල් සැකසුම්', to: '/admin/email' },
   { icon: 'password', en: 'Change password', si: 'මුරපදය වෙනස් කිරීම', to: '/admin/password' },
 ];
 

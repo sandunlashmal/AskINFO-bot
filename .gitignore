@@ -5,3 +5,5 @@ backend/config.php
 backend/hello.php
 backend/uploads/
 *.sql
+
+backend/secret.php

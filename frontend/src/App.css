@@ -1842,3 +1842,216 @@ a.secondary {
 .contact {
   max-width: 100%;
 }
+
+/* ===== Forgot password and Email settings ===== */
+
+/* "Forgot password?" under the Login button */
+.forgot-link {
+  align-self: center;
+  color: #1f3a68;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.forgot-link:hover {
+  color: #b07800;
+}
+
+/* the back link above the forgot card */
+.login-back {
+  align-self: flex-start;
+  margin-bottom: 14px;
+}
+
+/* the reset page has a form inside the white card */
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* a link that looks like the Login button */
+.link-button {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* "a reset link will be sent to r•••s@gmail.com" */
+.forgot-info {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #eef4fc;
+  color: #33405a;
+  font-size: 13.5px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.sent-to {
+  display: block;
+  margin: 4px 0;
+  color: #1f3a68;
+  font-size: 16px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* "Check the office email" after sending */
+.sent-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 18px 16px;
+  border: 1px solid #b9dfc1;
+  border-radius: 14px;
+  background: #edf8f0;
+  text-align: center;
+}
+
+.sent-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  background: #2e7d32;
+  color: #fff;
+}
+
+.sent-box b {
+  color: #1c5e20;
+  font-size: 17px;
+}
+
+.sent-box p {
+  margin: 6px 0 0;
+  color: #33405a;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+/* the saved email (green) or "no email yet" (amber) */
+.email-status {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 4px 0 16px;
+  padding: 16px 18px;
+  border-radius: 14px;
+}
+
+.email-status.on {
+  border: 1px solid #b9dfc1;
+  background: #edf8f0;
+}
+
+.email-status.off {
+  border: 1px solid #f0d58a;
+  background: #fff8e1;
+}
+
+.email-status-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.email-status.on .email-status-icon {
+  background: #2e7d32;
+}
+
+.email-status.off .email-status-icon {
+  background: #c98a00;
+}
+
+.email-status-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.email-status-text small {
+  color: #5b6880;
+  font-size: 13px;
+}
+
+.email-status-text b {
+  color: #1c2433;
+  font-size: 17px;
+}
+
+.email-status-tag {
+  color: #2e7d32;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Send test / Change / Remove */
+.email-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.email-buttons button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.email-buttons .primary:hover:not(:disabled) {
+  color: #ffbe29;
+}
+
+/* the App password box with its eye inside a normal form */
+.field .input-box input {
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+}
+
+.field-help {
+  color: #6a7891;
+  font-size: 12.5px;
+  font-weight: 400;
+}
+
+/* the steps to get an App password */
+.email-help {
+  margin-top: 18px;
+}
+
+.email-steps {
+  margin: 0;
+  padding-left: 22px;
+  color: #1c2433;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.email-steps li {
+  margin-bottom: 10px;
+  overflow-wrap: anywhere;
+}
+
+.email-steps small {
+  display: block;
+  color: #5b6880;
+  font-size: 13px;
+}

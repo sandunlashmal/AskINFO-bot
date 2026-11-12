@@ -16,6 +16,8 @@ function AdminLoginPage() {
 
   // already logged in? then me.php gives the admin
   const { data: admin, loading } = useApi('admin/me.php');
+  // is "Forgot password" set up? (an office email in "Email settings")
+  const { data: forgot } = useApi('admin/forgot.php');
 
   if (loading) {
     return (
@@ -139,6 +141,12 @@ function AdminLoginPage() {
             {busy ? 'Please wait... (රැඳී සිටින්න...)' : 'Login (ඇතුළු වන්න)'}
           </button>
 
+          {/* only when an office email is saved in "Email settings" */}
+          {forgot?.ready && (
+            <NavLink to="/admin/forgot" className="forgot-link">
+              Forgot password? (මුරපදය අමතකද?)
+            </NavLink>
+          )}
         </form>
       </div>
     </AdminLayout>
