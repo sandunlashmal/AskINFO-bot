@@ -5,6 +5,7 @@ import ServicePage from './pages/ServicePage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminHomePage from './pages/AdminHomePage';
 import AdminPasswordPage from './pages/AdminPasswordPage';
+import AdminLoginEmailPage from './pages/AdminLoginEmailPage';
 import AdminDivisionsPage from './pages/AdminDivisionsPage';
 import AdminOfficersPage from './pages/AdminOfficersPage';
 import AdminServicesPage from './pages/AdminServicesPage';
@@ -25,6 +26,7 @@ function App() {
       <Route path="/admin" element={<AdminLoginPage />} />
       <Route path="/admin/home" element={<AdminHomePage />} />
       <Route path="/admin/password" element={<AdminPasswordPage />} />
+      <Route path="/admin/login-email" element={<AdminLoginEmailPage />} />
       <Route path="/admin/divisions" element={<AdminDivisionsPage />} />
       <Route path="/admin/officers" element={<AdminOfficersPage />} />
       <Route path="/admin/services" element={<AdminServicesPage />} />

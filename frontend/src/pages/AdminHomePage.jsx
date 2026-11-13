@@ -9,6 +9,7 @@ const ICONS = {
   officers: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21c0-4 4-6 8-6s8 2 8 6',
   forms: 'M6 3h9l4 4v14H6z M14 3v5h5 M9 13h6 M9 17h6',
   email: 'M3 6h18v12H3z M3 7l9 6 9-6',
+  login: 'M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z M16 12v1.5a2.5 2.5 0 0 0 5 0V12a9 9 0 1 0-3.5 7.1',
   password: 'M15 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10z M11.5 12.5L3 21 M6 18l2 2 M8 16l2 2',
 };
 
@@ -19,6 +20,7 @@ const ADMIN_MENU = [
   { icon: 'officers', en: 'Officers', si: 'නිලධාරීන්', to: '/admin/officers' },
   { icon: 'forms', en: 'PDF forms', si: 'අයදුම්පත්', to: '/admin/forms' },
   { icon: 'email', en: 'Email settings', si: 'ඊමේල් සැකසුම්', to: '/admin/email' },
+  { icon: 'login', en: 'Login email', si: 'පිවිසුම් ඊමේල් ලිපිනය', to: '/admin/login-email' },
   { icon: 'password', en: 'Change password', si: 'මුරපදය වෙනස් කිරීම', to: '/admin/password' },
 ];
 
