@@ -1,7 +1,7 @@
 <?php
 // =====================================================================
 // Email for "Forgot password": settings in the database and a small
-// SMTP client (Gmail: smtp.gmail.com, port 587, App password).
+// SMTP client (Gmail: smtp.gmail.com, port 465 or 587, App password).
 // =====================================================================
 
 require_once __DIR__ . '/functions.php';
@@ -18,9 +18,8 @@ if (!defined('APP_KEY')) {
 if (!defined('SMTP_HOST')) {
     define('SMTP_HOST', 'smtp.gmail.com');
 }
-if (!defined('SMTP_PORT')) {
-    define('SMTP_PORT', 587);
-}
+// No SMTP_PORT in config.php: try port 465 first, then 587
+// (some networks block one of them)
 
 // Read one setting (null if not saved yet)
 function get_setting(string $name): ?string
@@ -74,7 +73,17 @@ function send_mail(string $to, string $subject, string $body): void
         throw new RuntimeException('The App password can not be read. Please type it again in Email settings and save.');
     }
 
-    $socket = @stream_socket_client('tcp://' . SMTP_HOST . ':' . SMTP_PORT, $errorNo, $errorText, 15);
+    // port 465 = safe (encrypted) from the start, other ports = STARTTLS later
+    $ports = defined('SMTP_PORT') ? [SMTP_PORT] : [465, 587];
+    $socket = false;
+    foreach ($ports as $port) {
+        $secure = ((int) $port === 465);
+        $address = ($secure ? 'ssl://' : 'tcp://') . SMTP_HOST . ':' . $port;
+        $socket = @stream_socket_client($address, $errorNo, $errorText, 10);
+        if ($socket) {
+            break;
+        }
+    }
     if (!$socket) {
         throw new RuntimeException('Could not connect to the mail server. Check the internet connection.');
     }
@@ -106,9 +115,11 @@ function send_mail(string $to, string $subject, string $body): void
     $command(null, 220);
     $hello = $command('EHLO askinfo-bot', 250);
     // switch to a safe (encrypted) connection
-    if (stripos($hello, 'STARTTLS') !== false) {
+    if (!$secure && stripos($hello, 'STARTTLS') !== false) {
         $command('STARTTLS', 220);
-        stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+        if (!@stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+            throw new RuntimeException('Could not make a safe connection to the mail server.');
+        }
         $command('EHLO askinfo-bot', 250);
     }
 
